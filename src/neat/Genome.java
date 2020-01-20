@@ -49,7 +49,6 @@ public class Genome implements Comparable{
     
     /**
      * Calculates the value of each node progressively to avoid recursion going too deep, saving outputs for last
-     * Stores the last output node's value in Score. If the score is negative, it gets set to 0, but doesn't affect the nodes output
      */
     public void calculate() {
         for(GeneNode n : nodes.values()) {
@@ -61,10 +60,10 @@ public class Genome implements Comparable{
 //            System.out.println(" > " + n + ": " + n.getValue());
             n.getValue();
         }
-        for(GeneNode n : getOutputs()) {
-            score = n.getValue();
-        } 
-        score = 100d/Math.abs(getComplexity() - 100);
+//        for(GeneNode n : getOutputs()) { // These are generally used for testing purposes only
+//            score = n.getValue();
+//        } 
+//        score = 100d/Math.abs(getComplexity() - 100);
     }
     
     /**
@@ -143,11 +142,35 @@ public class Genome implements Comparable{
      * @param inputs
      */
     public void setInputs(int... inputs) {
+        double[] doubles = new double[inputs.length];
+        for(int i = 0; i < inputs.length; ++i) doubles[i] = inputs[i];
+        setInputs(doubles);
+    }
+    /**
+     * Set input values of Genome to given double array
+     * If given array is larger than number of inputs, then trailing values will be ignored
+     * If given array is smaller than number of inputs, then remaining inputs will be set to 0
+     * @param inputs 
+     */
+    public void setInputs(double... inputs) {
         GeneNode[] ins = getInputs();
         int i;
         for(i = 0; i < ins.length && i < inputs.length; ++i) {
             ins[i].setValue(inputs[i]);
         } while(i < ins.length) ins[i++].setValue(0);
+    }
+    /**
+     * Returns an array of the values of the Output Nodes
+     * Does not run Calculate, should be run before calling this
+     * @return 
+     */
+    public double[] getOutputValues() {
+        GeneNode[] outputs = getOutputs();
+        double[] output = new double[outputs.length];
+        
+        for(int i = 0; i < outputs.length; ++i) output[i] = outputs[i].getValue();
+        
+        return output;
     }
     
     public GeneConnection getConnection(int in, int out) {

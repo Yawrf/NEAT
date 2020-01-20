@@ -139,8 +139,9 @@ public class SpeciesManipulator {
      * A value of 1 will remove everything except the Mascot
      */
     public void trim() {
-        calculate();
+//        calculate(); // Used for testing purposes only, usually
         for(Species s : species) {
+            s.calculateFitness();
             Genome[] g = s.getMembers(); 
                 Arrays.sort(g);
             s.resetList();
@@ -164,7 +165,8 @@ public class SpeciesManipulator {
         for(int i = 0; i < allotment.length; ++i) {
             for(int j = 0; j < allotment[i]; ++j) species.get(i).breedRandom();
         }
-    }   private double getTotalFitness() {
+    }   
+        private double getTotalFitness() {
             double out = 0;
             
             for(Species s : species) out += s.getFitness();
@@ -218,7 +220,7 @@ public class SpeciesManipulator {
      * Runs the calculateGenomes method of each species stored
      */
     public void calculate() {
-        for(Species s : species) {s.calculateGenomes(); s.calculateFitness();}
+        for(Species s : species) {s.calculateGenomes();}
     }
         
     /**

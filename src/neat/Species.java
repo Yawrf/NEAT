@@ -70,6 +70,23 @@ public class Species {
     public Genome getMascot() {
         return mascot;
     }
+    /**
+     * Returns the member of this species with the highest score
+     * @return 
+     */
+    public Genome getBestMember() {
+        int index = 0;
+        double max = Double.NEGATIVE_INFINITY;
+        
+        for(int i = 0; i < members.size(); ++i) {
+            if(members.get(i).getScore() > max) {
+                index = i;
+                max = members.get(i).getScore();
+            }
+        }
+        
+        return members.get(index);
+    }
     
     /**
      * Returns the complexity of the Mascot of this Species
@@ -77,12 +94,7 @@ public class Species {
      * @return 
      */
     public int mascotComplexity() {
-        int complexity = 0;
-        
-        complexity += mascot.getNodes().length;
-        complexity += mascot.getConnections().length;
-        
-        return complexity;
+        return mascot.getComplexity();
     }
     
     /**
