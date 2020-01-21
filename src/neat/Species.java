@@ -12,7 +12,7 @@ public class Species {
     
     private Genome mascot = null;
     private ArrayList<Genome> members = new ArrayList<>();
-    private final double compatVariance = 3.0d;
+    private final double compatVariance = 1.5d;
     private double totalFitness = 0d;
     
     public Species(Genome mascot) {

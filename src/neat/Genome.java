@@ -10,6 +10,7 @@ import java.util.Map;
 import java.util.Random;
 import javafx.scene.paint.Color;
 import visualizer.GenomeVisualizerFXMLController;
+import visualizer.GenomeVisualizerInterface;
 
 /**
  *
@@ -440,7 +441,7 @@ public class Genome implements Comparable{
         return out;
     }
     
-    public void visualize(GenomeVisualizerFXMLController controller) {
+    public void visualize(GenomeVisualizerInterface controller) {
 //        System.out.println("Begin Visualization");
         
         for(GeneConnection c : connections.getConnections()) {

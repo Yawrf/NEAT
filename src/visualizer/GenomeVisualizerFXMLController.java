@@ -22,7 +22,7 @@ import neat.Genome;
  *
  * @author rewil
  */
-public class GenomeVisualizerFXMLController implements Initializable {
+public class GenomeVisualizerFXMLController implements Initializable, GenomeVisualizerInterface {
     
     private Genome gen;
     
@@ -64,6 +64,7 @@ public class GenomeVisualizerFXMLController implements Initializable {
         
         private double xMod;
         private double yMod;
+    @Override
     public void drawNode(GeneNode g) {
         double nodeSize = 15;
         
@@ -77,6 +78,7 @@ public class GenomeVisualizerFXMLController implements Initializable {
         gc.fillText("" + g.getValue(), nodeX - nodeSize*1.5, nodeY);
         
     }
+    @Override
     public void drawConnection(GeneConnection c) {
         
         double x1 = c.getIn().getX() * xMod;
